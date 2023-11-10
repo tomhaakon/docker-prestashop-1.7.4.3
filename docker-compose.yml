@@ -1,7 +1,7 @@
 version: '3'
 services:
   mysql:
-    container_name: prestashop-1.7.4.3-mysql   
+    container_name: prestashop-1.7.4.3-mysql 
     volumes:
       - type: bind
         source: ./dbdata
@@ -16,12 +16,14 @@ services:
     networks:
       - prestashop-1.7.4.3-network
   prestashop:
-    container_name: prestashop-1.7.4.3
+    container_name: psold
     volumes:
       - type: bind
         source: ./psdata
         target: /var/www/html/
-    image: prestashop/prestashop:1.7.4.3 
+    build:
+      context: .
+      dockerfile: Dockerfile
     restart: unless-stopped
     depends_on:
       - mysql
